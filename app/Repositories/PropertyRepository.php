@@ -18,12 +18,12 @@ class PropertyRepository
      */
     public function create(CreatePropertyDTO $dto): Property
     {
-        // Get authenticated user ID safely
+        // Get authenticated user ID
         $userId = auth()->id();
 
-        // Fallback to ID 1 for testing
+        // Ensure user is authenticated
         if (!$userId) {
-            $userId = 1;
+            throw new \Exception('User must be authenticated to create a property');
         }
 
         // Create property

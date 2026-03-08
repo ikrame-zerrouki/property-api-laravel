@@ -15,7 +15,6 @@ class CreatePropertyDTO
         public readonly string $description,
         public readonly string $statut,
         public readonly bool $is_published,
-        public readonly ?int $user_id = 1, // Default user ID for testing
         public readonly array $images = []
     ) {}
 
@@ -33,7 +32,6 @@ class CreatePropertyDTO
             description: $request->description,
             statut: $request->statut ?? 'disponible',
             is_published: $request->boolean('is_published', false),
-            user_id: 1, // Default user for testing
             images: $request->file('images', [])
         );
     }
@@ -52,7 +50,6 @@ class CreatePropertyDTO
             description: $data['description'] ?? '',
             statut: $data['statut'] ?? 'disponible',
             is_published: $data['is_published'] ?? false,
-            user_id: $data['user_id'] ?? 1,
             images: $data['images'] ?? []
         );
     }
@@ -90,7 +87,6 @@ class CreatePropertyDTO
     public function toArray(): array
     {
         return [
-            'user_id' => $this->user_id,
             'type' => $this->type,
             'pieces' => $this->pieces,
             'surface' => $this->surface,

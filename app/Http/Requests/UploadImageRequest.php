@@ -9,14 +9,14 @@ class UploadImageRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        // Temporarily disabled for testing
-        return true;
+    // public function authorize(): bool
+    // {
+    //     // Temporarily disabled for testing
+    //     return true;
 
-        // Original code (commented)
-        // return auth()->check() && in_array(auth()->user()->role, ['agent', 'admin']);
-    }
+    //     // Original code (commented)
+    //     // return auth()->check() && in_array(auth()->user()->role, ['agent', 'admin']);
+    // }
 
     /**
      * Get the validation rules that apply to the request.

@@ -9,11 +9,11 @@ class StorePropertyRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        // Temporarily allow all requests for testing
-        return true;
-    }
+    // public function authorize(): bool
+    // {
+    //     // Temporarily allow all requests for testing
+    //     return true;
+    // }
 
     /**
      * Get the validation rules that apply to the request.

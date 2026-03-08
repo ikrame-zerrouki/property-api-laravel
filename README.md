@@ -1,139 +1,122 @@
+# 🏠 API de Gestion Immobilière
 
-🏠 Real Estate Management API
-A robust RESTful API built with Laravel for managing real estate properties with role-based access control (Admin, Agent, Visitor). This project implements a clean three-layer architecture (Controller → Service → Repository) following industry best practices.
+Une API RESTful robuste construite avec Laravel pour gérer des biens immobiliers avec un contrôle d'accès basé sur les rôles (Admin, Agent, Visiteur). Ce projet implémente une architecture propre en trois couches (Contrôleur → Service → Repository) suivant les meilleures pratiques de l'industrie.
 
-📋 Table of Contents
-Features
+---
 
-Tech Stack
+## 📋 Table des matières
+- [Fonctionnalités](#✨-fonctionnalités)
+- [Stack Technique](#🛠-stack-technique)
+- [Architecture](#🏗-architecture)
+- [Installation](#🚀-installation)
+- [Variables d'environnement](#🔧-variables-denvironnement)
+- [Rôles et permissions](#👥-rôles-et-permissions)
+- [Documentation API](#📚-documentation-api)
+- [Exemples de requêtes](#🔍-exemples-de-requêtes)
+- [Structure du projet](#📁-structure-du-projet)
+- [Tests](#🧪-tests)
+- [Fonctionnalités bonus](#🎯-fonctionnalités-bonus)
 
-Architecture
+---
 
-Installation
+## ✨ Fonctionnalités
 
-Environment Variables
+### Fonctionnalités principales
+- ✅ Authentification via Laravel Sanctum (token-based)
+- ✅ Contrôle d'accès basé sur les rôles (Admin, Agent, Visiteur)
+- ✅ Opérations CRUD complètes pour les biens immobiliers
+- ✅ Filtres avancés (ville, type, prix min/max, statut)
+- ✅ Recherche full-text sur le titre et la description
+- ✅ Upload d'images avec validation (taille, type)
+- ✅ Génération automatique des titres basée sur les détails du bien
 
-User Roles & Permissions
+### Architecture
+- ✅ Architecture en trois couches : Contrôleur → Service → Repository
+- ✅ DTOs pour le transfert de données entre les couches
+- ✅ Form Requests pour la validation
+- ✅ API Resources pour le formatage des réponses
+- ✅ Policies pour l'autorisation
+- ✅ Soft deletes pour les biens (Bonus)
 
-API Documentation
+---
 
-API Examples
+## 🛠 Stack Technique
 
-Project Structure
+- **Laravel** 
+- **PHP** 
+- **MySQL** 
+- **Laravel Sanctum** (Authentification API)
+- **Laravel Storage** (Gestion des fichiers)
 
-Testing
+---
 
-Bonus Features
+## 🏗 Architecture
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Requête │────▶│ Contrôleur │────▶│ Service │────▶│ Repository │────▶ Base de données
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+│ │ │
+Form Request DTO │
+│ │ │
+Validation Logique métier Requêtes DB
 
-✨ Features
-Core Features
-✅ Authentication via Laravel Sanctum (token-based)
 
-✅ Role-based access control (Admin, Agent, Visitor)
 
-✅ Complete CRUD operations for properties
+**Responsabilités des couches :**
+- **Contrôleur** : Gère les requêtes/réponses HTTP, autorisation
+- **Service** : Contient la logique métier, orchestre les repositories
+- **Repository** : Interactions avec la base de données, requêtes, filtres
+- **DTO** : Transfert de données entre les couches
+- **Form Request** : Règles de validation
+- **Resource** : Formatage des réponses JSON
 
-✅ Advanced filtering (city, type, price range, status)
+---
 
-✅ Full-text search on title and description
+## 🚀 Installation
 
-✅ Image upload with validation (size, type)
+### Prérequis
+- PHP >= 
+- Composer
+- MySQL >= 
+- Node.js & NPM (optionnel, pour le frontend)
 
-✅ Auto-generated titles based on property details
+### Installation pas à pas
 
-Architecture
-✅ Three-layer architecture: Controller → Service → Repository
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/ikrame-zerrouki/property-api-laravel.git
+cd property-api-laravel
 
-✅ DTOs for data transfer between layers
-
-✅ Form Requests for validation
-
-✅ API Resources for response formatting
-
-✅ Policies for authorization
-
-✅ Soft deletes for properties (Bonus)
-
-🛠 Tech Stack
-Laravel 10.x
-
-PHP 8.1+
-
-MySQL / MariaDB
-
-Laravel Sanctum (API Authentication)
-
-Laravel Storage (File handling)
-
-🏗 Architecture
-text
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Request   │────▶│  Controller │────▶│   Service   │────▶│  Repository │────▶ Database
-└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
-                           │                    │                    │
-                      Form Request              DTO                   │
-                           │                    │                    │
-                      Validation           Business Logic        DB Queries
-Layer Responsibilities:
-Controller: Handles HTTP requests/responses, authorization
-
-Service: Contains business logic, orchestrates repositories
-
-Repository: Database interactions, queries, filters
-
-DTO: Data transfer between layers
-
-Form Request: Validation rules
-
-Resource: JSON response formatting
-
-🚀 Installation
-Prerequisites
-PHP >= 8.1
-
-Composer
-
-MySQL >= 5.7
-
-Node.js & NPM (optional, for frontend)
-
-Step-by-step Installation
-bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/real-estate-api.git
-cd real-estate-api
-
-# 2. Install PHP dependencies
+# 2. Installer les dépendances PHP
 composer install
 
-# 3. Copy environment file
+# 3. Copier le fichier d'environnement
 cp .env.example .env
 
-# 4. Generate application key
+# 4. Générer la clé de l'application
 php artisan key:generate
 
-# 5. Configure database in .env file
-# Edit DB_DATABASE, DB_USERNAME, DB_PASSWORD
+# 5. Configurer la base de données dans le fichier .env
+# Modifier DB_DATABASE, DB_USERNAME, DB_PASSWORD
 
-# 6. Run migrations and seeders
-php artisan migrate --seed
+# 6. Exécuter les migrations et les seeders
+php artisan migrate 
 
-# 7. Create storage link
+# 7. Créer le lien de stockage
 php artisan storage:link
 
-# 8. Start the development server
+# 8. Démarrer le serveur de développement
 php artisan serve
-🔧 Environment Variables
-Key environment variables used in the project:
+🔧 Variables d'environnement
+Principales variables utilisées dans le projet :
 
-env
-# App Configuration
-APP_NAME="Real Estate API"
+
+# Configuration de l'application
+APP_NAME="API Immobilière"
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://localhost
 
-# Database Configuration
+# Configuration de la base de données
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -148,67 +131,64 @@ SESSION_DOMAIN=localhost
 # Pagination
 PROPERTIES_PER_PAGE=15
 
-# Filesystem
+# Système de fichiers
 FILESYSTEM_DISK=public
-👥 User Roles & Permissions
-Role	Create	Read	Update	Delete	Publish	Upload Images
-Admin	✅ All	✅ All	✅ All	✅ All	✅ All	✅ All
-Agent	✅	✅ All	✅ Own only	✅ Own only	✅ Own only	✅ Own only
-Visitor	❌	✅ Published only	❌	❌	❌	❌
-Default Users (from seeder)
-Admin: admin@example.com / password
+👥 Rôles et permissions
+Rôle	Créer	Lire	Modifier	Supprimer	Publier	Upload images
+Admin	✅ Tous	✅ Tous	✅ Tous	✅ Tous	✅ Tous	✅ Tous
+Agent	✅	✅ Tous	✅ Ses biens	✅ Ses biens	✅ Ses biens	✅ Ses biens
+Visiteur	❌	✅ Publiés seulement	❌	❌	❌	❌
+Utilisateurs par défaut (via seeder)
+Admin : admin@system.com / password
 
-Agent: agent@example.com / password
 
-Visitor: visitor@example.com / password
-
-📚 API Documentation
-Authentication Endpoints
-Method	Endpoint	Description	Access
-POST	/api/login	User login	Public
-POST	/api/register	User registration	Public
-POST	/api/logout	User logout	Auth
-GET	/api/user	Get current user	Auth
-Property Endpoints
-Method	Endpoint	Description	Access
-GET	/api/properties	List all properties	Public
-GET	/api/properties/{id}	Get property details	Public
-POST	/api/properties	Create new property	Admin/Agent
-PUT	/api/properties/{id}	Update property	Admin/Agent (owner)
-DELETE	/api/properties/{id}	Delete property	Admin/Agent (owner)
-PATCH	/api/properties/{id}/toggle-publish	Publish/unpublish	Admin/Agent (owner)
-Image Endpoints
-Method	Endpoint	Description	Access
-POST	/api/properties/{id}/images	Upload images	Admin/Agent (owner)
-GET	/api/properties/{id}/images	Get property images	Public
-DELETE	/api/images/{id}	Delete image	Admin/Agent (owner)
-POST	/api/images/bulk-delete	Delete multiple images	Admin/Agent (owner)
-PATCH	/api/images/{id}/set-primary	Set primary image	Admin/Agent (owner)
-🔍 API Examples
-1. User Login
+📚 Documentation API
+Endpoints d'authentification
+Méthode	Endpoint	Description	Accès
+POST	/api/login	Connexion utilisateur	Public
+POST	/api/register	Inscription utilisateur	Public
+POST	/api/logout	Déconnexion	Auth
+GET	/api/user	Infos utilisateur connecté	Auth
+Endpoints des biens
+Méthode	Endpoint	Description	Accès
+GET	/api/properties	Liste tous les biens	Public
+GET	/api/properties/{id}	Détails d'un bien	Public
+POST	/api/properties	Créer un bien	Admin/Agent
+PUT	/api/properties/{id}	Modifier un bien	Admin/Agent (propriétaire)
+DELETE	/api/properties/{id}	Supprimer un bien	Admin/Agent (propriétaire)
+PATCH	/api/properties/{id}/toggle-publish	Publier/Dépublier	Admin/Agent (propriétaire)
+Endpoints des images
+Méthode	Endpoint	Description	Accès
+POST	/api/properties/{id}/images	Uploader des images	Admin/Agent (propriétaire)
+GET	/api/properties/{id}/images	Voir les images d'un bien	Public
+DELETE	/api/images/{id}	Supprimer une image	Admin/Agent (propriétaire)
+POST	/api/images/bulk-delete	Supprimer plusieurs images	Admin/Agent (propriétaire)
+PATCH	/api/images/{id}/set-primary	Définir image principale	Admin/Agent (propriétaire)
+🔍 Exemples de requêtes
+1. Connexion utilisateur
 bash
 POST /api/login
 Content-Type: application/json
 
 {
-    "email": "agent@example.com",
+    "email": "admin@system.com",
     "password": "password"
 }
-Response:
+Réponse :
 
 json
 {
     "success": true,
-    "message": "Login successful",
+    "message": "Connexion réussie",
     "token": "1|laravel_sanctum_token_here",
     "user": {
         "id": 2,
         "name": "Agent User",
-        "email": "agent@example.com",
-        "role": "agent"
+        "email": "admin@system.com",
+        "role": "admin"
     }
 }
-2. Create Property (with images)
+2. Créer un bien (avec images)
 bash
 POST /api/properties
 Authorization: Bearer {token}
@@ -220,18 +200,18 @@ Content-Type: multipart/form-data
     "surface": 120.5,
     "prix": 2500000,
     "ville": "Alger",
-    "description": "Beautiful apartment in central location",
+    "description": "Bel appartement en plein centre",
     "statut": "disponible",
     "is_published": true,
     "images[]": @file1.jpg,
     "images[]": @file2.jpg
 }
-Response:
+Réponse :
 
 json
 {
     "success": true,
-    "message": "Property created successfully",
+    "message": "Bien créé avec succès",
     "data": {
         "id": 1,
         "title": "Appartement 4 pièces à Alger",
@@ -243,10 +223,10 @@ json
         "images": [...]
     }
 }
-3. Filter Properties
+3. Filtrer les biens
 bash
-GET /api/properties?ville=Alger&type=appartement&prix_min=1000000&prix_max=3000000&statut=disponible&search=beautiful&per_page=10
-Response:
+GET /api/properties?ville=Alger&type=appartement&prix_min=1000000&prix_max=3000000&statut=disponible&search=beau&per_page=10
+Réponse :
 
 json
 {
@@ -259,7 +239,7 @@ json
         "last_page": 3
     }
 }
-4. Upload Images
+4. Uploader des images
 bash
 POST /api/properties/1/images
 Authorization: Bearer {token}
@@ -269,12 +249,12 @@ Content-Type: multipart/form-data
     "images[]": @image1.jpg,
     "images[]": @image2.jpg
 }
-Response:
+Réponse :
 
 json
 {
     "success": true,
-    "message": "2 image(s) uploaded successfully",
+    "message": "2 image(s) uploadée(s) avec succès",
     "data": [
         {
             "id": 1,
@@ -288,7 +268,7 @@ json
         }
     ]
 }
-📁 Project Structure
+📁 Structure du projet
 text
 📦 project-root
 ├── 📂 app
@@ -333,52 +313,44 @@ text
 │   └── api.php
 ├── .env.example
 └── README.md
-🧪 Testing
-Run tests using PHPUnit:
+🧪 Tests
+Exécuter les tests avec PHPUnit :
 
 bash
-# Run all tests
+# Exécuter tous les tests
 php artisan test
 
-# Run specific test
+# Exécuter un test spécifique
 php artisan test --filter PropertyTest
-🎯 Bonus Features Implemented
-✅ Soft Deletes for properties
+🎯 Fonctionnalités bonus implémentées
+✅ Soft Deletes pour les biens
 
-✅ Full-text search on title and description
+✅ Recherche full-text sur le titre et la description
 
-✅ Bulk image delete functionality
+✅ Suppression groupée d'images
 
-✅ Primary image selection
+✅ Sélection d'image principale
 
-✅ Formatted responses with proper status codes
+✅ Réponses formatées avec codes de statut appropriés
 
-✅ Pagination with customizable per-page values
+✅ Pagination avec valeurs personnalisables par page
 
-✅ Advanced filtering with multiple criteria
+✅ Filtres avancés avec critères multiples
 
-📝 License
-This project is created for technical assessment purposes at Digitup Company.
+📝 Licence
+Ce projet a été créé à des fins d'évaluation technique pour Digitup Company.
 
-👨‍💻 Author
-ikram zerrouki
+👨‍💻 Auteur
+Ikram Zerrouki
+📧 Email : ikramzerrouki670@gmail.com
+🐙 GitHub : @ikrame-zerrouki
 
-Email: ikramzerrouki670@gmail.com
+🙏 Remerciements
+Digitup Company pour l'opportunité
 
-GitHub: [ikram zerrouki](https://github.com/ikrame-zerrouki/property-api-laravel.git)
+La communauté Laravel pour l'excellente documentation
 
-🙏 Acknowledgments
-Digitup Company for the opportunity
-
-Laravel community for excellent documentation
-
-📧 For questions or support: your.email@example.com
-
-✅ Project completed on: March 2025
-
-
-
-
+✅ Projet réalisé en : Mars 2026
 
 
 
